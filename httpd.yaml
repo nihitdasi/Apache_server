@@ -21,7 +21,7 @@
         state: reloaded
     - name: Copy Index file through Apache directory
       copy:
-        src: /tmp/index.html
+        src: index.html
         dest: /var/www/html/
     - name: Restart Apache Service
       service:
