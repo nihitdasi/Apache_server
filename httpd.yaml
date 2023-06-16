@@ -1,6 +1,6 @@
 ---
 - name: Configuring Apache Web Server
-  hosts: localhost
+  hosts: node2
   tasks:
     - name: Install Apache Package
       yum:
