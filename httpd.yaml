@@ -1,0 +1,29 @@
+---
+- name: Configuring Apache Web Server
+  hosts: localhost
+  tasks:
+    - name: Install Apache Package
+      yum:
+        name: httpd
+        state: present
+    - name: Start Apache Service
+      service:
+        name: httpd
+        state: started
+    - name: Add Firewall Rules
+      firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+    - name: Reload Firewall Configuration for the new rule
+      systemd:
+        name: firewalld
+        state: reloaded
+    - name: Copy Index file through Apache directory
+      copy:
+        src: /tmp/index.html
+        dest: /var/www/html/
+    - name: Restart Apache Service
+      service:
+        name: httpd
+        state: restarted
