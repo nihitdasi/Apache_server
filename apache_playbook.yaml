@@ -1,8 +1,7 @@
 ---
 - name: configuring the apache server
   hosts: node2
-  become: true
-  become_user: sudo
+  become: yes
   tasks:
     - name: Install prerequisites
       apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
