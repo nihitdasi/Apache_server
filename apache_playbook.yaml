@@ -23,9 +23,13 @@
       systemd:
         name: firewalld
         state: reloaded
-    - name: creating the directory
+    - name: copying index file
       copy:
         src: index.html
+        dest: /var/www/html/
+    - name: copying style file
+      copy:
+        src: style.css
         dest: /var/www/html/
     - name: restarting the apache services
       service:
