@@ -2,6 +2,9 @@
 - name: configuring the apache server
   hosts: node2
   tasks:
+    - name: Install prerequisites
+      apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
+      loop: [ 'aptitude' ]
     - name: installing the apache packages
       apt:
         name: apache2
