@@ -2,7 +2,7 @@
 - name: configuring the apache server
   hosts: playbook
   tasks:
-    - name: installing the apach packages
+    - name: installing the apache packages
       yum:
         name: httpd
         state: present
@@ -25,7 +25,7 @@
         state: reloaded
     - name: creating the directory
       copy:
-        src: /tmp/index.html
+        src: index.html
         dest: /var/www/html/
     - name: restarting the apache services
       service:
