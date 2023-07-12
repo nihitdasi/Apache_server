@@ -1,0 +1,33 @@
+---
+- name: configuring the apache server
+  hosts: playbook
+  tasks:
+    - name: installing the apach packages
+      yum:
+        name: httpd
+        state: present
+    - name: starting apache services
+      service:
+        name: httpd
+        state: started
+    - name: installing firewalld
+      yum:
+        name: firewalld
+        state: present
+    - name: add firewall rules
+      firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+    - name: reload firewall rules
+      systemd:
+        name: firewalld
+        state: reloaded
+    - name: creating the directory
+      copy:
+        src: /tmp/index.html
+        dest: /var/www/html/
+    - name: restarting the apache services
+      service:
+        name: httpd
+        state: restarted
